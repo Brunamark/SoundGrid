@@ -1,3 +1,65 @@
 # SoundGrid
 SoundGrid is a versatile API designed to seamlessly integrate with multiple platforms. The SoundGrid is created as a technical case for DTI Enterprise.
 
+## Project Structure
+
+```plaintext
+music-service/
+├── src/
+│   ├── main/
+│   │   ├── java/
+│   │   │   └── com/
+│   │   │       └── example/
+│   │   │           └── music/
+│   │   │               ├── MusicServiceApplication.java
+│   │   │               ├── domain/                           # Domain Layer
+│   │   │               │   ├── model/                        
+│   │   │               │   │   └── Music.java                # Core
+│   │   │               │   ├── types/
+│   │   │               │   │   └── Genre.java   
+│   │   │               │   ├── exception/                    
+│   │   │               │   │   └── MusicNotFoundException.java
+│   │   │               │   └── service/                      
+│   │   │               │       └── MusicService.java
+│   │   │               │
+│   │   │               ├── application/                      # Application Layer
+│   │   │               │   ├── port/                         
+│   │   │               │   │   ├── input/                    # External communication systems with core
+│   │   │               │   │   │   └── MusicUseCase.java
+│   │   │               │   │   └── output/                   # Core communication with external systems
+│   │   │               │   │       └── MusicRepository.java
+│   │   │               │   └── service/                    
+│   │   │               │       └── MusicServiceImpl.java    # Implements MusicUseCase (CRUD)
+│   │   │               │
+│   │   │               └── infrastructure/                   # Infrastructure Layer
+│   │   │                   ├── adapter/                      
+│   │   │                   │   ├── input/                    # Input Adapters
+│   │   │                   │   │   └── rest/                 # REST Controllers
+│   │   │                   │   │       ├── MusicController.java
+│   │   │                   │   │       ├── request/          # Request DTOs
+│   │   │                   │   │       │   └── MusicRequest.java
+│   │   │                   │   │       └── response/         # Response DTOs
+│   │   │                   │   │           └── MusicResponse.java
+│   │   │                   │   │   
+│   │   │                   │   └── output/                   # Output Adapters
+│   │   │                   │       ├── persistence/          
+│   │   │                   │       │   ├── MusicRepositoryImpl.java
+│   │   │                   │       │   ├── entity/           
+│   │   │                   │       │   │   └── MusicEntity.java
+│   │   │                   │       │   ├── mapper/           # Entity-Domain Mappers
+│   │   │                   │       │   │   └── MusicMapper.java
+│   │   │                   │       │   └── repository/       # Spring Data Repositories
+│   │   │                   │       │       └── SpringDataMusicRepository.java
+│   │   │                   │       └── messaging/            # Messaging Adapters (if needed)
+│   │   │                   │           └── MusicEventProducer.java
+│   │   │                   └── config/                       # Configuration Classes
+│   │   │                       ├── BeanConfiguration.java
+│   │   │                       └── WebConfiguration.java
+│   │   └── resources/
+│   │       ├── application.properties
+│   │       └── schema.sql                                    # Database schema
+│   └── test/                                                 # Unit and Integration tests
+└── pom.xml                                                  # Maven Dependencies
+└── data/
+    └── app.db                                              # Database file
+```
