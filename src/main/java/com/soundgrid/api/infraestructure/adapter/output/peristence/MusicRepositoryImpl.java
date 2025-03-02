@@ -1,4 +1,4 @@
-package com.soundgrid.api.infrastructure.adapter.output.persistence;
+package com.soundgrid.api.infraestructure.adapter.output.peristence;
 
 import java.util.List;
 import java.util.Map;

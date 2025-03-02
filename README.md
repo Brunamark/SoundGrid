@@ -63,3 +63,10 @@ music-service/
 └── data/
     └── app.db                                              # Database file
 ```
+
+## Test
+
+run the command:
+```plaintext
+
+```
