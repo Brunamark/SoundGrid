@@ -5,33 +5,25 @@ import java.time.LocalDateTime;
 
 import com.soundgrid.api.domain.types.Genre;
 
-import jakarta.validation.constraints.NotNull;
 
 public class Music {
-    @NotNull(message = "The id cannot be null.")
     private Long id;
-    @NotNull(message = "The title cannot be null.")
     private String title;
-    @NotNull(message = "The artist cannot be null.")
     private String artist;
     private String album;
-    @NotNull(message = "The genre cannot be null.")
     private Genre genre;
-    @NotNull(message = "The release date cannot be null.")
     private LocalDate releaseDate;
     private int duration;
-    @NotNull(message = "The file path cannot be null.")
     private String filePath;
     private final LocalDateTime createdAt;
     private LocalDateTime updatedAt;
 
-
-    public Music(@NotNull(message = "The id cannot be null.") Long id,
-            @NotNull(message = "The title cannot be null.") String title,
-            @NotNull(message = "The artist cannot be null.") String artist, String album,
-            @NotNull(message = "The genre cannot be null.") Genre genre,
-            @NotNull(message = "The release date cannot be null.") LocalDate releaseDate, int duration,
-            @NotNull(message = "The file path cannot be null.") String filePath) {
+    public Music(Long id,
+            String title,
+            String artist, String album,
+            Genre genre,
+            LocalDate releaseDate, int duration,
+            String filePath, LocalDateTime createdAt, LocalDateTime updatedAt) {
         this.id = id;
         this.title = title;
         this.artist = artist;
@@ -40,8 +32,8 @@ public class Music {
         this.releaseDate = releaseDate;
         this.duration = duration;
         this.filePath = filePath;
-        this.createdAt = LocalDateTime.now();
-        this.updatedAt = null;
+        this.createdAt = createdAt;
+        this.updatedAt = updatedAt;
     }
 
     public Long getId() {
@@ -111,7 +103,6 @@ public class Music {
     public LocalDateTime getCreatedAt() {
         return createdAt;
     }
-
 
     public LocalDateTime getUpdatedAt() {
         return updatedAt;

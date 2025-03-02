@@ -7,6 +7,7 @@ import com.soundgrid.api.application.port.input.MusicUseCase;
 import com.soundgrid.api.application.port.output.MusicRepository;
 import com.soundgrid.api.domain.exception.MusicNotFoundException;
 import com.soundgrid.api.domain.model.Music;
+import com.soundgrid.api.domain.types.Genre;
 
 public class MusicServiceImpl implements MusicUseCase {
 
@@ -28,12 +29,12 @@ public class MusicServiceImpl implements MusicUseCase {
     }
 
     @Override
-    public Map<String, List<Music>> getAllMusic() {
+    public Map<Genre, List<Music>> getAllMusic() {
         return musicRepository.findAll();
     }
 
     @Override
-    public Map<String, List<Music>> searchMusic(String keyword) {
+    public Map<Genre, List<Music>> searchMusic(String keyword) {
         return musicRepository.findByTitleContainingOrArtistContaining(keyword, keyword);
     }
 
