@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <configuration>
 
-    <property name="LOG_DIR" value="logs" />
+    <property name="LOG_DIR" value="${user.dir}/logs" />
 
     <appender name="API_LOG" class="ch.qos.logback.core.rolling.RollingFileAppender">
         <file>${LOG_DIR}/api.log</file>
@@ -15,6 +15,18 @@
     </appender>
 
     <logger name="org.hibernate.validator" level="ERROR" additivity="false">
+        <appender-ref ref="API_LOG" />
+    </logger>
+
+    <logger name="org.hibernate.engine.jdbc.spi.SqlExceptionHelper" level="ERROR" additivity="false">
+        <appender-ref ref="API_LOG" />
+    </logger>
+
+    <logger name="org.hibernate.SQL" level="DEBUG" additivity="false">
+        <appender-ref ref="API_LOG" />
+    </logger>
+
+    <logger name="org.hibernate.type.descriptor.sql.BasicBinder" level="TRACE" additivity="false">
         <appender-ref ref="API_LOG" />
     </logger>
 
