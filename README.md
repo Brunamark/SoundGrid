@@ -1,5 +1,5 @@
 # SoundGrid
-SoundGrid is a versatile API designed to seamlessly integrate with multiple platforms. The SoundGrid is created as a technical case for DTI Enterprise.
+SoundGrid is a versatile API designed to seamlessly integrate with multiple platforms.
 
 ## Project Structure
 
@@ -78,7 +78,7 @@ music-service/
 
 ## 🚀 How to Run the Application
 
-run the command in terminal :
+Run the command in terminal :
 ```plaintext
    $ mvn spring-boot:run
 ```
@@ -179,5 +179,56 @@ After that you can see if these tests pass or fail in terminal as shown below:
     <li>Given an file paath that exceed 100 characters or has less than 10 characters, it should terminate the application and show an ERROR in api.log "The file path must be between 10 and 100 characters long.". </li>
     <li>Given an invalid musicId, it should terminate the application and show an ERROR in api.log "Music not found with id: ${id}".</li>
 </ul>
+
+## ⚠️ Common Issues & Troubleshooting
+
+### 🚀 Maven Build Fails
+**Issue:** Running `mvn clean install` results in an error like: 
+
+```
+Could not find or load main class
+
+```
+**Solution:** Ensure you have JDK 21 installed and configured properly:
+```bash
+$ java -version
+```
+if still having issues try to set the correct JDK:
+
+```
+export JAVA_HOME=/path/to/jdk21
+
+```
+
+### 🐞 Dependency Not Found
+**Issue:** Maven throws an error:
+```
+Could not resolve dependency org.springframework.boot:spring-boot-starter:3.4.3
+```
+
+**Solution:** Try updating your local dependencies:
+
+```
+mvn clean install -U
+```
+
+### 🔧 Application Port Conflict
+**Issue:** Trying to start the app but getting:
+```
+Port 8080 is already in use
+
+```
+**Solution:** Stop the process using the port:
+```
+lsof -i :8080   # Mac/Linux
+netstat -ano | findstr :8080  # Windows
+kill -9 <PID>   # Terminate the process (replace <PID> with the actual process ID)
+
+```
+
+
+
+
+
 
 
