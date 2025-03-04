@@ -41,7 +41,7 @@ public class MusicEntity {
     @Size(max = 50, message = "Artist name cannot be longer than 50 characters.")
     private String artist;
 
-    @Size(max = 100, message = "O nome do álbum não pode ter mais de 100 caracteres.")
+    @Size(max = 100, message = "The album name cannot be longer than 100 characters.")
     private String album;
     @Enumerated(EnumType.STRING)
     @Column(nullable = false)
@@ -53,19 +53,18 @@ public class MusicEntity {
     @Max(value = 600, message = "Duration cannot be greater than 600 seconds.")
     private int duration;
     @Column(nullable = false, name = "file_path")
+    @Size(max = 100, min=10, message = "The file path name cannot be longer than 100 characters.")
     private String filePath;
     @Column(name = "created_at", updatable = false)
     private LocalDateTime createdAt = LocalDateTime.now();
     @Column(name = "update_at")
     private LocalDateTime updatedAt;
 
-
     @PrePersist
     protected void onCreate() {
         createdAt = LocalDateTime.now();
         updatedAt = createdAt;
     }
-
 
     @PreUpdate
     protected void onUpdate() {
