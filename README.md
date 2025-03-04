@@ -68,7 +68,15 @@ music-service/
 
 ```
 
-## Test
+## 🔧 Application Setup 
+
+#### Prerequisites
+<ul>
+	<li><strong>Java 21 (JDK 21)</strong> – You can find it on <a href="https://www.oracle.com/java/technologies/javase/jdk21-archive-downloads.html">Oracle</a>.</li>
+	<li><strong>Maven 3.9.9</strong> – You can find it on <a href="https://maven.apache.org/download.cgi">Maven</a>.</li>
+</ul>
+
+## 🚀 How to Run the Application
 
 run the command in terminal :
 ```plaintext
@@ -95,8 +103,29 @@ com.soundgrid.api.domain.exception.MusicNotFoundException: Music not found with 
 	at com.soundgrid.api.application.service.MusicServiceImpl.lambda$0(MusicServiceImpl.java:27)
 	at java.base/java.util.Optional.orElseThrow(Optional.java:403)
 ```
-### ✅ Test Cases
-#### 1️⃣ Create Music (Cadastrar nova música)
+Note: This application uses JUnit test in MusicService. You can run the test using this command:
+```
+$ mvn test -Dtest=MusicServiceTests
+
+```
+After that you can see if these tests pass or fail in terminal as shown below:
+```
+[INFO] Tests run: 4, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.769 s -- in com.soundgrid.api.MusicServiceTests
+[INFO] 
+[INFO] Results:
+[INFO] 
+[INFO] Tests run: 4, Failures: 0, Errors: 0, Skipped: 0
+[INFO] 
+[INFO] ------------------------------------------------------------------------
+[INFO] BUILD SUCCESS
+[INFO] ------------------------------------------------------------------------
+[INFO] Total time:  2.850 s
+[INFO] Finished at: 2025-03-04T12:17:51-03:00
+[INFO] ------------------------------------------------------------------------
+```
+
+## ✅ Test Cases
+### 1️⃣ Create Music (Cadastrar nova música)
 <ul>
     <li>Given valid Music data, when calling createMusic, it should return "✅ Música cadastrada com sucesso!"</li>
     <li>Given an empty or null title, it should ask to put a valid title and show this on terminal "❌ O título não pode estar vazio.". </li>
@@ -113,19 +142,19 @@ com.soundgrid.api.domain.exception.MusicNotFoundException: Music not found with 
     <li>Given an file paath that exceed 100 characters or has less than 10 characters, it should terminate the application and show an ERROR in api.log "The file path must be between 10 and 100 characters long.". </li>
 </ul>
 
-#### 2️⃣ Get Music by ID (Buscar música por ID)
+### 2️⃣ Get Music by ID (Buscar música por ID)
 
 <ul>
 	<li>Given a valid musicId, it should return the correct music object.</li>
 	<li>Given an invalid musicId, it should terminate the application and show an ERROR in api.log "Music not found with id: ${id}".</li>
 </ul>
 
-#### 3️⃣ Get All Music (Listar músicas)
+### 3️⃣ Get All Music (Listar músicas)
 <ul>
 	<li>Type 1 in terminal it should list all musics.</li>
 </ul>
 
-#### 4️⃣ Delete Music (Deletar música)
+### 4️⃣ Delete Music (Deletar música)
 <ul> 
 	<li>Given a valid musicId, it should return the correct music object.</li>
  	<li>Given an invalid musicId,it should terminate the application and show an ERROR in api.log "Music not found with id: ${id}".</li>
@@ -151,23 +180,4 @@ com.soundgrid.api.domain.exception.MusicNotFoundException: Music not found with 
     <li>Given an invalid musicId, it should terminate the application and show an ERROR in api.log "Music not found with id: ${id}".</li>
 </ul>
 
-Note: This application uses JUnit test in MusicService. You can run the test using this command:
-```
-$ mvn test -Dtest=MusicServiceTests
 
-```
-After that you can see if these tests pass or fail in terminal as shown below:
-```
-[INFO] Tests run: 4, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.769 s -- in com.soundgrid.api.MusicServiceTests
-[INFO] 
-[INFO] Results:
-[INFO] 
-[INFO] Tests run: 4, Failures: 0, Errors: 0, Skipped: 0
-[INFO] 
-[INFO] ------------------------------------------------------------------------
-[INFO] BUILD SUCCESS
-[INFO] ------------------------------------------------------------------------
-[INFO] Total time:  2.850 s
-[INFO] Finished at: 2025-03-04T12:17:51-03:00
-[INFO] ------------------------------------------------------------------------
-```
