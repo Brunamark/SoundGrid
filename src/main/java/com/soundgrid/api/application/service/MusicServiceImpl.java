@@ -2,7 +2,6 @@ package com.soundgrid.api.application.service;
 
 import java.util.List;
 import java.util.Map;
-
 import com.soundgrid.api.application.port.input.MusicUseCase;
 import com.soundgrid.api.application.port.output.MusicRepository;
 import com.soundgrid.api.domain.exception.MusicNotFoundException;
