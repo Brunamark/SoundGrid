@@ -96,7 +96,7 @@ com.soundgrid.api.domain.exception.MusicNotFoundException: Music not found with 
 	at java.base/java.util.Optional.orElseThrow(Optional.java:403)
 ```
 ### ✅ Test Cases
-#### 1️⃣ Create Music (createMusic)
+#### 1️⃣ Create Music (Cadastrar nova música)
 <ul>
     <li>Given valid Music data, when calling createMusic, it should return "✅ Música cadastrada com sucesso!"</li>
     <li>Given an empty or null title, it should ask to put a valid title and show this on terminal "❌ O título não pode estar vazio.". </li>
@@ -105,18 +105,51 @@ com.soundgrid.api.domain.exception.MusicNotFoundException: Music not found with 
     <li>Given an empty, null genre or a invalid genre, it should ask to put a valid genre and show this on terminal "❌ Gênero inválido! Escolha um dos seguintes: [POP, ROCK, HIP_HOP_RAP, JAZZ, ELETRONICA, CLASSICA, BLUES, COUNTRY, REGGAE, R_B, FUNK, METAL, SOUL, FOLK, SERTANEJO, SAMBA, FORRO, BOSSA_NOVA]". </li>
     <li>Given an empty, null or invalid format date , it should ask to put a valid release date and show this on terminal "❌ Data inválida! Use o formato correto: YYYY-MM-DD.". </li>
     <li>Given an empty, null or negative duration, it should ask to put a valid duration and show this on terminal "❌ A duração deve ser um número positivo.". </li>
-    <li>Given an empty or null title, it should ask to put a valid title and show this on terminal "❌ O título não pode estar vazio.". </li>
     <li>Given an empty or null file path, it should ask to put a valid file path and show this on terminal "❌ O caminho do arquivo não pode estar vazio.". </li>
     <li>Given an title that exceed 100 characters, it should terminate the application and show an ERROR in api.log "The title cannot be longer than 100 characters.". </li>
     <li>Given an artits that exceed 50 characters, it should terminate the application and show an ERROR in api.log "The artist name cannot be longer than 50 characters.". </li>
     <li>Given an album that exceed 100 characters, it should terminate the application and show an ERROR in api.log "The album cannot be longer than 50 characters.". </li>
     <li>Given an release date that is in the future, it should terminate the application and show an ERROR in api.log "The release date cannot be in the future.". </li>
     <li>Given an file paath that exceed 100 characters or has less than 10 characters, it should terminate the application and show an ERROR in api.log "The file path must be between 10 and 100 characters long.". </li>
-
-
-
 </ul>
 
+#### 2️⃣ Get Music by ID (Buscar música por ID)
+
+<ul>
+	<li>Given a valid musicId, it should return the correct music object.</li>
+	<li>Given an invalid musicId, it should terminate the application and show an ERROR in api.log "Music not found with id: ${id}".</li>
+</ul>
+
+#### 3️⃣ Get All Music (Listar músicas)
+<ul>
+	<li>Type 1 in terminal it should list all musics.</li>
+</ul>
+
+#### 4️⃣ Delete Music (Deletar música)
+<ul> 
+	<li>Given a valid musicId, it should return the correct music object.</li>
+ 	<li>Given an invalid musicId,it should terminate the application and show an ERROR in api.log "Music not found with id: ${id}".</li>
+</ul> 
+
+### 5️⃣ Update Music (Atualizar música)
+<ul>
+    <li>Given valid Music data, when calling createMusic, it should return "✅ Música atualizada com sucesso!"</li>
+    <li>Given an empty or null title, it should mantain the last title value. </li>
+    <li>Given an empty or null artist, it should mantain the last artist value. </li>
+    <li>Given an empty or null album, it should mantain the last album value.</li>
+    <li>Given an empty genre, it should mantain the last genre value. </li>
+    <li>Given an empty date, it should mantain the last date value. </li>
+    <li>Given an invalid format date , it should ask to put a valid release date and show this on terminal "❌ Data inválida! Use o formato correto: YYYY-MM-DD.". </li>
+    <li>Given an empty duration, it should mantain the last duration value. </li>
+    <li>Given an negative duration, it should ask to put a valid duration and show this on terminal "❌ A duração deve ser um número positivo.". </li>
+    <li>Given an empty file path, it should mantain the last file path value. </li>
+    <li>Given an title that exceed 100 characters, it should terminate the application and show an ERROR in api.log "The title cannot be longer than 100 characters.". </li>
+    <li>Given an artits that exceed 50 characters, it should terminate the application and show an ERROR in api.log "The artist name cannot be longer than 50 characters.". </li>
+    <li>Given an album that exceed 100 characters, it should terminate the application and show an ERROR in api.log "The album cannot be longer than 50 characters.". </li>
+    <li>Given an release date that is in the future, it should terminate the application and show an ERROR in api.log "The release date cannot be in the future.". </li>
+    <li>Given an file paath that exceed 100 characters or has less than 10 characters, it should terminate the application and show an ERROR in api.log "The file path must be between 10 and 100 characters long.". </li>
+    <li>Given an invalid musicId, it should terminate the application and show an ERROR in api.log "Music not found with id: ${id}".</li>
+</ul>
 
 Note: This application uses JUnit test in MusicService. You can run the test using this command:
 ```
