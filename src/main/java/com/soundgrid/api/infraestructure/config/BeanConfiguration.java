@@ -37,7 +37,7 @@ public class BeanConfiguration {
                 System.out.println("3. Cadastrar nova música");
                 System.out.println("4. Atualizar música");
                 System.out.println("5. Deletar música");
-                System.out.println("0. Sair");
+                System.out.println("Ctrl + C. Sair");
                 System.out.print("Escolha uma opção: ");
 
                 String opcao = scanner.nextLine();
