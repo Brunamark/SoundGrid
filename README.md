@@ -225,8 +225,77 @@ netstat -ano | findstr :8080  # Windows
 kill -9 <PID>   # Terminate the process (replace <PID> with the actual process ID)
 
 ```
+## 🏗️ Project Architecture – Hexagonal (Ports & Adapters)
+This project follows the Hexagonal Architecture (Ports & Adapters) to separate business logic from external dependencies, making it scalable, maintainable, and testable.
 
+### 📌 Layers Overview
 
+1️⃣ Domain Layer → Business rules and core models
+
+2️⃣ Application Layer → Use cases (service layer)
+
+3️⃣ Infrastructure Layer → Communication with external systems
+
+4️⃣ Adapters → Interfaces between external systems and the core
+
+#### 1️⃣ Domain Layer (domain/) 🏛️
+📍 Purpose: Contains business rules, entities, and exceptions.
+✔ Independent from frameworks
+✔ No external dependencies
+
+📂 Files:
+<ul>
+	<li>model/Music.java → Core business entity</li>
+	<li>types/Genre.java → Enum for music genres</li>
+	<li>exception/MusicNotFoundException.java → Custom exception</li>
+</ul>
+
+#### 2️⃣ Application Layer (application/) 🛠️
+📍 Purpose: Handles use cases and coordinates business logic.
+✔ Implements Ports (Input/Output Interfaces)
+✔ Calls repositories and services
+
+📂 Files:
+
+<ul>
+	<li>port/input/MusicUseCase.java → Defines available operations</li>
+	<li>port/output/MusicRepository.java → Abstracts persistence</li>
+	<li>service/MusicServiceImpl.java → Implements MusicUseCase (CRUD)</li>
+</ul>
+
+#### 3️⃣ Infrastructure Layer (infrastructure/) 🏗️
+📍 Purpose: Connects the application to external systems.
+✔ Defines adapters for REST, persistence, and config
+✔ Implements repositories, controllers, and mappers
+
+📂 Files:
+
+<ul>
+	<li>Input Adapters (adapter/input/)</li>
+	<li>rest/MusicController.java → Handles HTTP requests</li>
+	<li>request/MusicRequest.java → DTO for requests</li>
+ 	<li>response/MusicResponse.java → DTO for responses</li>
+        <li>Output Adapters (adapter/output/)</li>
+	<li>persistence/MusicRepositoryImpl.java → Implements MusicRepository</li>
+ 	<li>entity/MusicEntity.java → Persistence entity</li>
+  	<li>mapper/MusicMapper.java → Converts MusicEntity ⇄ Music</li>
+   	<li>repository/SpringDataMusicRepository.java → Spring Data repository</li>
+	
+</ul>
+
+#### 4️⃣ Configuration (config/) ⚙️
+📍 Purpose: Holds configurations (Beans, properties, and logging).
+
+📂 Files:
+<ul>
+	<li>config/BeanConfiguration.java → Defines Spring Beans</li>
+	<li>resources/application.properties → App settings</li>
+	<li>resources/logback-spring.xml → Logging configuration</li>
+</ul>
+
+#### 🔄 Summary – How the Layers Interact
+
+User Request → Controller (Input Adapter) → Service Layer (Use Case) → Repository (Output Adapter) → Database
 
 
 
