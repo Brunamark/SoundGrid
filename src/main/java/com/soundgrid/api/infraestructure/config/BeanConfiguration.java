@@ -88,7 +88,10 @@ public class BeanConfiguration {
                 System.out.println("Nenhuma música disponível neste gênero.");
             } else {
                 for (Music music : musics) {
-                    System.out.println(music.getId() + " - " + music.getTitle() + " - " + music.getArtist());
+                    System.out.println(music.getId() + " - " + music.getTitle() + " - " + music.getArtist()
+                            + (music.getAlbum() != null && !music.getAlbum().trim().isEmpty()
+                                    ? " Album: " + music.getAlbum()
+                                    : ""));
                 }
             }
         }
@@ -100,7 +103,9 @@ public class BeanConfiguration {
 
         Music music = musicService.getMusicById(id);
         if (music != null) {
-            System.out.println("✅ Música encontrada: " + music.getTitle() + " - " + music.getArtist());
+            System.out.println("✅ Música encontrada: " + music.getTitle() + " - " + music.getArtist()
+                    + (music.getAlbum() != null && !music.getAlbum().trim().isEmpty() ? "Album: " + music.getAlbum()
+                            : ""));
         } else {
             System.out.println("❌ Música não encontrada.");
         }
@@ -208,17 +213,43 @@ public class BeanConfiguration {
         if (album.isEmpty())
             album = musicaExistente.getAlbum();
 
-        System.out.println("Escolha um novo gênero: " + Arrays.toString(Genre.values()));
-        Genre genre = Genre.valueOf(scanner.nextLine().toUpperCase());
+        Genre genre = null;
+        while (genre == null) {
+            System.out.println("Escolha um novo gênero: " + Arrays.toString(Genre.values()));
+            String genreInput = scanner.nextLine().trim().toUpperCase();
+            if (genreInput.isEmpty()) {
+                genre = musicaExistente.getGenre();
+            } else {
+                try {
+                    genre = Genre.valueOf(genreInput);
+                } catch (IllegalArgumentException e) {
+                    System.out.println("❌ Gênero inválido! Escolha um dos gêneros listados.");
+                }
+            }
+        }
 
         System.out.print("Nova data de lançamento (YYYY-MM-DD) ou Enter para manter: "
                 + musicaExistente.getReleaseDate() + ": ");
-        String dateInput = scanner.nextLine();
-        LocalDate releaseDate = dateInput.isEmpty() ? musicaExistente.getReleaseDate() : LocalDate.parse(dateInput);
+        LocalDate releaseDate = musicaExistente.getReleaseDate();
+        String dateInput = scanner.nextLine().trim();
+        if (!dateInput.isEmpty()) {
+            try {
+                releaseDate = LocalDate.parse(dateInput);
+            } catch (Exception e) {
+                System.out.println("❌ Data inválida! Mantendo data anterior.");
+            }
+        }
 
         System.out.print("Nova duração (segundos) ou Enter para manter: " + musicaExistente.getDuration() + ": ");
-        String durationInput = scanner.nextLine();
-        int duration = durationInput.isEmpty() ? musicaExistente.getDuration() : Integer.parseInt(durationInput);
+        int duration = musicaExistente.getDuration();
+        String durationInput = scanner.nextLine().trim();
+        if (!durationInput.isEmpty()) {
+            try {
+                duration = Integer.parseInt(durationInput);
+            } catch (NumberFormatException e) {
+                System.out.println("❌ Duração inválida! Mantendo valor anterior.");
+            }
+        }
 
         System.out.print("Novo caminho do arquivo (Enter para manter: " + musicaExistente.getFilePath() + "): ");
         String filePath = scanner.nextLine();
